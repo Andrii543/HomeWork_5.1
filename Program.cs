@@ -75,7 +75,6 @@ internal class Program
             Console.WriteLine($"OverflowException - {ex.Message}");
         }
 
-        throw new ArgumentException("Ділення на 0 не можливе");
 
     }
 }
