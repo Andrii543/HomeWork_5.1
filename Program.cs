@@ -6,65 +6,47 @@ internal class Program
     {
         Console.OutputEncoding = UTF8Encoding.UTF8;
 
-
         try
         {
             Console.WriteLine("Впиши два числа");
 
-            //Введення першого числа від користувача
+            // Введення першого числа від користувача
             Console.Write("Перше число: ");
-            double numOne = Convert.ToDouble(Console.ReadLine());
+            decimal numOne = Convert.ToDecimal(Console.ReadLine());
 
-            //Введення другого числа від користувача
+            // Введення другого числа від користувача
             Console.Write("Друге число: ");
-            double numTwo = Convert.ToDouble(Console.ReadLine());
-
-
+            decimal numTwo = Convert.ToDecimal(Console.ReadLine());
 
             Console.WriteLine("Виберіть математичну дію");
 
-            //Введення математичної дії від користувача
-            Console.WriteLine("1:Додати(+) 2:Відняти(-) 3:Помножити(х) 4:Поділити(:) ");
+            // Введення математичної дії від користувача
+            Console.WriteLine("1: Додати (+) 2: Відняти (-) 3: Помножити (х) 4: Поділити (:)");
             int userInput = Convert.ToInt32(Console.ReadLine());
 
+            // Змінна для збереження результата
+            decimal result = 0;
 
-            //Змінна для верефікації чи користувач ввів 0 обравши дію ділення, бо на 0 ділити не можливо
-            bool Verefication = true;
-            if (userInput == 4 && numTwo == 0)
+            switch (userInput)
             {
-                Console.WriteLine("Ділення на 0 не можливе");
-                Verefication = false;
+                case 1:
+                    result = numOne + numTwo;
+                    break;
+                case 2:
+                    result = numOne - numTwo;
+                    break;
+                case 3:
+                    result = numOne * numTwo;
+                    break;
+                case 4:
+                    result = numOne / numTwo; // Якщо numTwo == 0, тут виникне DivideByZeroException
+                    break;
+                default:
+                    Console.WriteLine("Вибрана неправильна дія");
+                    return;
             }
 
-            //змінна для збереження результата
-
-            if (Verefication == true)
-            {
-                //змінна для збереження результата
-                decimal result = 0;
-
-
-                switch (userInput)
-                {
-                    case 1:
-                        result = (decimal)(numOne + numTwo);
-                        break;
-                    case 2:
-                        result = (decimal)(numOne - numTwo);
-                        break;
-                    case 3:
-                        result = (decimal)(numOne * numTwo);
-                        break;
-                    case 4:
-                        result = (decimal)(numOne / numTwo);
-                        break;
-                    default:
-                        Console.WriteLine("Вибрана неправильна дія");
-                        break;
-                }
-
-                Console.WriteLine($"\nРезультат {result:F2}");
-            }
+            Console.WriteLine($"\nРезультат: {result:F2}");
         }
         catch (FormatException ex)
         {
@@ -74,8 +56,10 @@ internal class Program
         {
             Console.WriteLine($"OverflowException - {ex.Message}");
         }
-
-        throw new ArgumentException("Ділення на 0 не можливе");
-
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine($"DivideByZeroException - {ex.Message}");
+        }
     }
+
 }
