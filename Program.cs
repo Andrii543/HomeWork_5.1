@@ -56,6 +56,7 @@ internal class Program
         {
             Console.WriteLine($"OverflowException - {ex.Message}");
         }
+<<<<<<< HEAD
         catch (DivideByZeroException ex)
         {
             Console.WriteLine($"DivideByZeroException - {ex.Message}");
@@ -63,3 +64,9 @@ internal class Program
     }
 
 }
+=======
+
+
+    }
+}
+>>>>>>> d7ada9ef10a2fa629236bbf0db06891393d56ba0
